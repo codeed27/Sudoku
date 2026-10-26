@@ -153,3 +153,89 @@ h1 {
         font-size: 14px;
     }
 }
+
+/* Completed number buttons */
+.numbers button.completed {
+    background: #d9f7e8;
+    color: #168454;
+    border: 1px solid #8ddbb4;
+}
+
+.numbers button.completed::after {
+    content: " ✓";
+    font-size: 10px;
+}
+
+/* Game ending screen */
+.end-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(24, 35, 58, 0.65);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.end-screen.show {
+    display: flex;
+}
+
+.end-card {
+    width: 100%;
+    max-width: 340px;
+    padding: 30px 22px;
+    background: white;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 15px 50px #00000025;
+    animation: popIn 0.25s ease-out;
+}
+
+.end-icon {
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #e9efff;
+    color: #4169e1;
+    font-size: 30px;
+}
+
+.end-card h2 {
+    color: #4169e1;
+    font-size: 25px;
+    margin: 10px 0;
+}
+
+.end-card p {
+    color: #7b8498;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.end-card button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px;
+    background: #4169e1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

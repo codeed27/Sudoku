@@ -239,3 +239,115 @@ h1 {
         transform: scale(1);
     }
 }
+
+/* Make the entire game larger */
+.container {
+    max-width: 650px;
+    padding: 28px;
+}
+
+h1 {
+    font-size: 46px;
+}
+
+.subtitle {
+    font-size: 16px;
+}
+
+.info {
+    font-size: 17px;
+}
+
+/* Larger, clearer Sudoku numbers */
+.cell {
+    font-size: clamp(20px, 4vw, 30px);
+    font-weight: 600;
+}
+
+.cell.fixed {
+    font-weight: 800;
+}
+
+/* Nine different pastel-colored 3x3 boxes */
+.cell.box-0 { background: #fff0f0; }
+.cell.box-1 { background: #fff5df; }
+.cell.box-2 { background: #eef9e9; }
+
+.cell.box-3 { background: #eaf3ff; }
+.cell.box-4 { background: #f5eaff; }
+.cell.box-5 { background: #e3f8f5; }
+
+.cell.box-6 { background: #fff0e4; }
+.cell.box-7 { background: #fce9f2; }
+.cell.box-8 { background: #edf0ff; }
+
+/* Keep selected cell clearly visible */
+.cell.selected {
+    background: #c7d8ff;
+    outline: 3px solid #4169e1;
+    outline-offset: -3px;
+}
+
+/* Bigger number buttons */
+.numbers button {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 13px 0;
+    min-height: 48px;
+}
+
+/* Undo and game controls */
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 10px;
+}
+
+.actions button {
+    min-width: 0;
+    padding: 14px 6px;
+    font-size: 14px;
+}
+
+.actions .undo-btn {
+    background: #e9efff;
+    color: #3558b5;
+}
+
+/* Mistake notification */
+#message.mistake-message {
+    display: inline-block;
+    padding: 9px 12px;
+    border-radius: 9px;
+    background: #fff0f0;
+    color: #c62828;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+/* Fit small screens */
+@media (max-width: 480px) {
+    body {
+        padding: 12px 8px;
+    }
+
+    .container {
+        padding: 14px 10px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    .cell {
+        font-size: clamp(17px, 5vw, 24px);
+    }
+
+    .actions {
+        gap: 5px;
+    }
+
+    .actions button {
+        font-size: 12px;
+    }
+}

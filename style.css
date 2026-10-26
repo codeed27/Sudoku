@@ -1,0 +1,155 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eef2ff;
+    font-family: Arial, sans-serif;
+    color: #25304a;
+}
+
+.container {
+    width: 100%;
+    max-width: 440px;
+    padding: 22px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px #27385b18;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 38px;
+    color: #4169e1;
+}
+
+.subtitle {
+    color: #7b8498;
+    font-size: 13px;
+    margin-bottom: 22px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: 100%;
+    aspect-ratio: 1;
+    border: 2px solid #354764;
+}
+
+.cell {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-right: 1px solid #cbd3e1;
+    border-bottom: 1px solid #cbd3e1;
+    background: white;
+    color: #4169e1;
+    font-size: clamp(14px, 4vw, 21px);
+    cursor: pointer;
+}
+
+.cell.fixed {
+    background: #f1f4fa;
+    color: #263650;
+    font-weight: bold;
+}
+
+.cell.selected {
+    background: #dce6ff;
+    outline: 2px solid #4169e1;
+    outline-offset: -2px;
+}
+
+.cell:nth-child(3n) {
+    border-right: 2px solid #354764;
+}
+
+.cell:nth-child(9n) {
+    border-right: 0;
+}
+
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid #354764;
+}
+
+.numbers {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    margin-top: 16px;
+}
+
+.numbers button {
+    padding: 10px 0;
+    border: none;
+    border-radius: 8px;
+    background: #edf1ff;
+    color: #344a80;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.numbers button:hover {
+    background: #dce5ff;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.actions button {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: #4169e1;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.actions button:first-child {
+    background: #e9edf5;
+    color: #354764;
+}
+
+#message {
+    min-height: 18px;
+    font-size: 12px;
+    color: #7b8498;
+    margin-bottom: 0;
+}
+
+@media (max-width: 380px) {
+    .container {
+        padding: 12px;
+    }
+
+    .numbers {
+        gap: 3px;
+    }
+
+    .numbers button {
+        font-size: 14px;
+    }
+}

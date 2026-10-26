@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Sudoku</h1>
+        <p class="subtitle">Relax your mind. Challenge yourself.</p>
+
+        <div class="info">
+            <p>Mistakes: <span id="mistakes">0</span></p>
+            <p>Time: <span id="timer">00:00</span></p>
+        </div>
+
+        <div id="board"></div>
+
+        <div class="numbers">
+            <button onclick="enterNumber(1)">1</button>
+            <button onclick="enterNumber(2)">2</button>
+            <button onclick="enterNumber(3)">3</button>
+            <button onclick="enterNumber(4)">4</button>
+            <button onclick="enterNumber(5)">5</button>
+            <button onclick="enterNumber(6)">6</button>
+            <button onclick="enterNumber(7)">7</button>
+            <button onclick="enterNumber(8)">8</button>
+            <button onclick="enterNumber(9)">9</button>
+            <button onclick="enterNumber(0)">⌫</button>
+        </div>
+
+        <div class="actions">
+            <button onclick="resetGame()">Reset</button>
+            <button onclick="newGame()">New Game</button>
+        </div>
+
+        <p id="message">Select an empty cell to begin.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

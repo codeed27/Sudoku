@@ -1,6 +1,8 @@
 
 const board = document.getElementById("board");
 
+let moveHistory = [];
+
 let puzzle = [];
 let solution = [];
 let values = [];
@@ -73,6 +75,8 @@ function newGame() {
     mistakes = 0;
     seconds = 0;
     selected = null;
+moveHistory = [];
+    
     finished = false;
 
     document.getElementById("mistakes").textContent = "0";
@@ -95,7 +99,12 @@ function drawBoard() {
         for (let col = 0; col < 9; col++) {
             const cell = document.createElement("button");
             cell.type = "button";
-            cell.className = "cell";
+            
+const boxNumber =
+    Math.floor(row / 3) * 3 + Math.floor(col / 3);
+
+cell.className = "cell box-" + boxNumber;
+            
 
             if (puzzle[row][col] !== 0) {
                 cell.textContent = puzzle[row][col];
@@ -126,12 +135,16 @@ function drawBoard() {
     }
 }
 
-function enterNumber(number) {
-    if (finished) return;
 
-    if (!selected) {
-        document.getElementById("message").textContent =
-            "Select an empty cell first.";
+        
+
+    
+function enterNumber(number) {
+    if (!selected || finished) {
+        if (!finished) {
+            document.getElementById("message").textContent =
+                "Select an empty cell first.";
+        }
         return;
     }
 
@@ -139,34 +152,91 @@ function enterNumber(number) {
     const col = selected.col;
 
     if (number === 0) {
+        if (values[row][col] === 0) return;
+
+        moveHistory.push({
+            row,
+            col,
+            previousValue: values[row][col]
+        });
+
         values[row][col] = 0;
     } else {
-        // Do not count the same unchanged entry twice.
         if (values[row][col] === number) return;
+
+        // Save the previous value so Undo can restore it.
+        moveHistory.push({
+            row,
+            col,
+            previousValue: values[row][col]
+        });
 
         values[row][col] = number;
 
-        // Count mistakes without showing which entry is wrong.
         if (number !== solution[row][col]) {
             mistakes++;
-            document.getElementById("mistakes").textContent = mistakes;
+
+            document.getElementById("mistakes").textContent =
+                mistakes;
+
+            const message = document.getElementById("message");
+
+            message.classList.add("mistake-message");
 
             if (mistakes >= MAX_MISTAKES) {
+                message.textContent =
+                    "⚠️ GAME OVER! You used all 5 chances.";
+
                 drawBoard();
                 updateNumberButtons();
                 endGame(false);
                 return;
             }
-        }
+
+function undoMove() {
+    if (finished) return;
+
+    if (moveHistory.length === 0) {
+        document.getElementById("message").textContent =
+            "Nothing to undo yet.";
+        return;
     }
 
-    document.getElementById("message").textContent =
-        "Keep going. You're doing great!";
+    const lastMove = moveHistory.pop();
+
+    values[lastMove.row][lastMove.col] =
+        lastMove.previousValue;
+
+    selected = {
+        row: lastMove.row,
+        col: lastMove.col
+    };
+
+    const message = document.getElementById("message");
+
+    message.classList.remove("mistake-message");
+    message.textContent =
+        "Last move undone. Your mistake count is unchanged.";
+
+    drawBoard();
+    updateNumberButtons();
+}
+            
+            message.textContent =
+                `⚠️ Mistake! ${MAX_MISTAKES - mistakes} chances left.`;
+        } else {
+            const message = document.getElementById("message");
+
+            message.classList.remove("mistake-message");
+            message.textContent = "Good move! Keep going.";
+        }
+    }
 
     drawBoard();
     updateNumberButtons();
     checkCompletion();
 }
+
 
 function updateNumberButtons() {
     const buttons = document.querySelectorAll(".numbers button");
@@ -235,6 +305,13 @@ function resetGame() {
     mistakes = 0;
     seconds = 0;
     selected = null;
+    
+moveHistory = [];
+
+document.getElementById("message").classList.remove(
+    "mistake-message"
+);
+    
 
     document.getElementById("mistakes").textContent = "0";
     document.getElementById("timer").textContent = "00:00";
